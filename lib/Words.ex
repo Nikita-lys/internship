@@ -12,10 +12,7 @@ defmodule Words do
   """
 
   @doc """
-  Words.count("car : carpet as java : javascript!!&@$%^&")
-  Words.count("one fish two fish red fish blue fish")
-  Words.count("testing, 1, 2 testing")
-  Words.count("two_words")
+  Функция, которая считает количество вхождений слова в текст.
   """
   def count(str) do
     str
