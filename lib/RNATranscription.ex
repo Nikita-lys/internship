@@ -49,7 +49,4 @@ defmodule RNATranscription do
   def to_rna(str) do
     rna(str, '')
   end
-
 end
-
-
