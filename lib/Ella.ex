@@ -11,21 +11,50 @@ defmodule Ella do
   """
 
   @doc """
+  Проверка, находится ли строка в верхнем регистре.
+  """
+  defp up?(str) do
+    String.upcase(str) == str
+  end
+
+  @doc """
+  Проверка, имеет ли строка хотя бы одну букву.
+  """
+  defp letter?(str) do
+    String.match?(str, ~r/\p{L}/)
+  end
+
+  @doc """
+  Проверка, заканчивается ли строка знаком ?
+  """
+  defp end?(str) do
+    String.ends_with?(str, "?")
+  end
+
+  @doc """
+  Проверка, длина строки бельше 1.
+  """
+  defp len?(str) do
+    String.length(str) > 1
+  end
+
+  @doc """
   Бот, который ведёт диалог как Эллочка-Людоедка.
   """
-  def say(smt \\ "") do
+  def say(str \\ "") do
+    # Удаляем все пробелы
+    str = String.replace(str, " ", "")
     cond do
       # если входная строка пустая, то "Подумаешь!"
-      smt == "" -> "Подумаешь!"
+      str == "" -> "Подумаешь!"
       # если входная строка в верхнем регистре, последний символ - ?, длина строки больше 1 и
       # она имеет хотя бы одну букву, то "Не учите меня жить!"
-      String.upcase(smt) == smt and String.ends_with?(smt, "?") and String.length(smt) > 1
-        and Regex.match?(~r/\p{L}/, smt) -> "Не учите меня жить!"
+      up?(str) and end?(str) and len?(str) and letter?(str) -> "Не учите меня жить!"
       # если во входной строке последний символ - ? и она имеет хотя бы одну букву, то "Мрак"
-      String.ends_with?(smt, "?") and Regex.match?(~r/\p{L}/, smt) -> "Мрак"
+      end?(str) and letter?(str) -> "Мрак"
       # если входная строка в верхнем регистре и она имеет хотя бы одну букву, то "Хамите, парниша!"
-      String.upcase(smt) == smt and Regex.match?(~r/\p{L}/, smt)  -> "Хамите, парниша!"
-      # для всего остального
+      up?(str) and letter?(str)  -> "Хамите, парниша!"
+      # для всего остального "Хо-хо!"
       true -> "Хо-хо!"
     end
   end

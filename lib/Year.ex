@@ -8,12 +8,16 @@ defmodule Year do
   """
 
   @doc """
+  Целочисленное деление.
+  """
+  defp div_by?(year, number) do
+    rem(year, number) == 0
+   end
+
+  @doc """
   Функция, определяющая, високосный ли заданный год.
   """
   def leap?(year) do
-    cond do
-      rem(year, 4) == 0 and rem(year, 100) != 0 or rem(year, 400) == 0 -> true
-      true -> false
-    end
+    div_by?(year, 4) and not div_by?(year, 100) or div_by?(year, 400)
   end
 end

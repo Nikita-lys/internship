@@ -12,7 +12,7 @@ defmodule HrBot do
   """
   defp name_in_true_form(name) do
     # Берём последний символ в имени
-    last_char = String.slice(name, -1..-1)
+    last_char = String.last(name)
     # Отрезаем последний символ в имени
     new_name = String.slice(name, 0..-2)
     cond do

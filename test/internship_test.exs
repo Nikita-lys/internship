@@ -9,12 +9,12 @@ defmodule Tests do
   end
 
   test "Year.leap?(integer)" do
-    assert Year.leap?(2100) == false
-    assert Year.leap?(2104) == true
-    assert Year.leap?(1900) == false
-    assert Year.leap?(2000) == true
-    assert Year.leap?(1996) == true
-    assert Year.leap?(2019) == false
+    refute Year.leap?(2100)
+    assert Year.leap?(2104)
+    refute Year.leap?(1900)
+    assert Year.leap?(2000)
+    assert Year.leap?(1996)
+    refute Year.leap?(2019)
   end
 
   test "RNATranscription.to_rna(charlist)" do
