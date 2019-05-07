@@ -38,10 +38,11 @@ defmodule Tests do
     assert Ella.say("sfdfsf?") == "Мрак"
     assert Ella.say("sfdFFFsf?") == "Мрак"
     assert Ella.say("!1!!f&!?") == "Мрак"
+    assert Ella.say("!1&!?") == "Мрак"
+    assert Ella.say("?") == "Мрак"
     assert Ella.say("h") == "Хо-хо!"
-    assert Ella.say("?") == "Хо-хо!"
     assert Ella.say("!1!&!") == "Хо-хо!"
-    assert Ella.say("!1&!?") == "Хо-хо!"
+
     assert Ella.say("111123456") == "Хо-хо!"
   end
 
