@@ -38,6 +38,6 @@ defmodule RNATranscription do
   По цепочке ДНК, возвращает её РНК-комплемент (согласно транскрипции РНК).
   """
   def to_rna(str) do
-    Enum.map(str, fn letter -> transcribe(letter) end)
+    Enum.map(str, &(transcribe(&1)))
   end
 end
