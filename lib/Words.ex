@@ -16,10 +16,8 @@ defmodule Words do
   """
   defp to_list(str) do
     str
-    # Создаём список и при этом удаляем не буквы
-    |> String.split(~r/[\p{P}\p{S}" "]+/)
-    # удаляем пустые слова
-    |> Enum.reject(fn x -> x == "" end)
+    # Создаём список и при этом удаляем не буквы и пустые слова
+    |> String.split(~r/[\p{P}\p{S}" "]+/, trim: true)
     # все слова в нижний регистр
     |> Enum.map(fn x -> String.downcase(x) end)
   end

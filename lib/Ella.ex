@@ -13,28 +13,28 @@ defmodule Ella do
   @doc """
   Проверка, находится ли строка в верхнем регистре.
   """
-  defp up?(str) do
+  defp in_upcase?(str) do
     String.upcase(str) == str
   end
 
   @doc """
   Проверка, имеет ли строка хотя бы одну букву.
   """
-  defp letter?(str) do
+  defp have_a_letter?(str) do
     String.match?(str, ~r/\p{L}/)
   end
 
   @doc """
-  Проверка, заканчивается ли строка знаком ?
+  Проверка, заканчивается ли строка знаком "?"
   """
-  defp end?(str) do
+  defp question?(str) do
     String.ends_with?(str, "?")
   end
 
   @doc """
   Проверка, длина строки бельше 1.
   """
-  defp len?(str) do
+  defp len_more_than_1?(str) do
     String.length(str) > 1
   end
 
@@ -42,18 +42,16 @@ defmodule Ella do
   Бот, который ведёт диалог как Эллочка-Людоедка.
   """
   def say(str \\ "") do
-    # Удаляем все пробелы
-    str = String.replace(str, " ", "")
     cond do
       # если входная строка пустая, то "Подумаешь!"
-      str == "" -> "Подумаешь!"
+      String.trim(str) == "" -> "Подумаешь!"
       # если входная строка в верхнем регистре, последний символ - ?, длина строки больше 1 и
       # она имеет хотя бы одну букву, то "Не учите меня жить!"
-      up?(str) and end?(str) and len?(str) and letter?(str) -> "Не учите меня жить!"
+      in_upcase?(str) and question?(str) and len_more_than_1?(str) and have_a_letter?(str) -> "Не учите меня жить!"
       # если во входной строке последний символ - ? и она имеет хотя бы одну букву, то "Мрак"
-      end?(str) and letter?(str) -> "Мрак"
+      question?(str) and have_a_letter?(str) -> "Мрак"
       # если входная строка в верхнем регистре и она имеет хотя бы одну букву, то "Хамите, парниша!"
-      up?(str) and letter?(str)  -> "Хамите, парниша!"
+      in_upcase?(str) and have_a_letter?(str)  -> "Хамите, парниша!"
       # для всего остального "Хо-хо!"
       true -> "Хо-хо!"
     end
